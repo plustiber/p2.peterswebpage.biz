@@ -31,7 +31,7 @@ A email designated to receive messages from the server. Examples:
 	define('SYSTEM_EMAIL', 'plustiber@post.harvard.edu'); 
 
 # Default DB name for this app
-	define('DB_NAME', "myapp_com"); 
+	define('DB_NAME', "p2_peterswebpage_biz"); 
 
 # Timezone
 	define('TIMEZONE', 'America/New_York');
