@@ -51,11 +51,14 @@ class users_controller extends base_controller {
         
     }
 
-    public function login() {
+    public function login($error = NULL) {
 
         # Set up the view
         $this->template->content = View::instance('v_users_login');
         $this->template->title   = "Login";
+
+        # Append error message (if any) to the view
+        $this->template->content->error = $error;
 
         # Render the view
         echo $this->template;
@@ -96,7 +99,7 @@ class users_controller extends base_controller {
             param 3 = when to expire
             param 4 = the path of the cooke (a single forward slash sets it for the entire domain)
             */
-            setcookie("token", $token, strtotime('+1 year'), '/');
+            setcookie("token", $token, strtotime('+2 weeks'), '/');
 
             # Send them to the main page - or whever you want them to go
             Router::redirect("/");
@@ -105,7 +108,7 @@ class users_controller extends base_controller {
         } else {
 
             # Send them back to the login page
-            Router::redirect("/users/login/");
+            Router::redirect("/users/login/error");
 
         }
     }
