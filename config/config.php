@@ -43,5 +43,5 @@ A email designated to receive messages from the server. Examples:
 	//define('SMTP_PASSWORD', '');
 
 # For extra security, you might want to set different salts than what the core uses
-	//define('PASSWORD_SALT', '');
-	//define('TOKEN_SALT', '');
+	define('PASSWORD_SALT', 'uL8O#d$%CAye&uwQrWJg@k__sYFcCd1(ZAgsvaNn');
+	define('TOKEN_SALT', '7NsS8F9zMws&Va@)pjX#3JhpKF27D$hsB7@#cGFr');
