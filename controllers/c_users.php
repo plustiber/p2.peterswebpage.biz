@@ -60,6 +60,10 @@ class users_controller extends base_controller {
         # Append error message (if any) to the view
         $this->template->content->error = $error;
 
+        # CSS/JS includes
+        $client_files_head = Array("/css/p2.css");
+        $this->template->client_files_head = Utils::load_client_files($client_files_head);
+
         # Render the view
         echo $this->template;
 

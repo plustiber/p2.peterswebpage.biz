@@ -1,0 +1,12 @@
+/**************************************************
+Peter Lustiber
+CSCI E-15 Dynamic Web Applications
+Project 2
+November 1, 2013 
+**************************************************/
+
+/* Error - set the color to red in order to emphasize error message */
+
+.error {
+color: red;
+}
