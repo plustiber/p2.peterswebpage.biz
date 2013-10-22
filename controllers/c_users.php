@@ -154,4 +154,39 @@ class users_controller extends base_controller {
         }
     }
 
+    public function p_profile() {
+        
+        # Update the last modiefied time
+        $_POST['modified']  = Time::now();
+
+        # Validate that the email entered is unique
+
+        $q = "SELECT token 
+            FROM users 
+            WHERE email = '".$_POST['email']."' 
+            AND user_id != '".$this->user->user_id."'";
+
+        #echo $q;
+
+        $token = DB::instance(DB_NAME)->select_field($q);
+
+        if ($token != "") {
+            echo "Not a unique user";
+        } else {
+            # Update the information into the database
+            $where_condition = "WHERE user_id = '".$this->user->user_id."'";
+            DB::instance(DB_NAME)->update_row('users', $_POST, $where_condition);
+            Router::redirect("/");      
+        }
+
+        # Dump out the results of POST to see what the form submitted
+/*
+        echo '<pre>';
+        print_r($_POST);
+        print_r($this->user);
+        echo '</pre>';          
+*/
+
+    }
+
 } # end of class
