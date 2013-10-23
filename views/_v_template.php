@@ -21,6 +21,9 @@
 
             <a href='/users/logout'>Logout</a>
             <a href='/users/profile'>Profile</a>
+            <a href='/posts/users'>Follow</a>
+            <a href='/posts/index'>View Posts</a>
+            <a href='/posts/add'>Add Post</a>
 
         <!-- Menu options for users who are not logged in -->
         <?php else: ?>
@@ -33,7 +36,7 @@
     </div>
 
     <br>
-    
+
 	<?php if(isset($content)) echo $content; ?>
 
 	<?php if(isset($client_files_body)) echo $client_files_body; ?>

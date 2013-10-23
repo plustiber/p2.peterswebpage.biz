@@ -58,13 +58,7 @@ class posts_controller extends base_controller {
         INNER JOIN users ON posts.user_id = users.user_id
         WHERE users_users.user_id = '".$this->user->user_id."'
         AND posts.user_id = users_users.user_id_followed";
-/*
-    # Build the query
-    $q = "SELECT * 
-        FROM posts
-        JOIN users
-        WHERE posts.user_id = users.user_id";
-*/
+
     # Run the query
     $posts = DB::instance(DB_NAME)->select_rows($q);
 
@@ -82,16 +76,17 @@ class posts_controller extends base_controller {
         $this->template->content = View::instance("v_posts_users");
         $this->template->title   = "Users";
 
-        # Build the query to get all the users
-        $q = "SELECT *
-            FROM users";
+        # Build query to get list of all the users (except yourself)
+        $q = "SELECT * 
+            FROM users
+            WHERE user_id != ".$this->user->user_id;
 
         # Execute the query to get all the users. 
-        # Store the result array in the variable $users
+        # Store the results in the array variable $users
         $users = DB::instance(DB_NAME)->select_rows($q);
 
-        # Build the query to figure out what connections does this user already have? 
-        # I.e. who are they following
+        # Build query to determine what connections does this user already have,
+        # i.e., who are they following?
         $q = "SELECT * 
             FROM users_users
             WHERE user_id = ".$this->user->user_id;
@@ -99,7 +94,7 @@ class posts_controller extends base_controller {
         # Execute this query with the select_array method
         # select_array will return our results in an array and use the "users_id_followed" field as the index.
         # This will come in handy when we get to the view
-        # Store our results (an array) in the variable $connections
+        # Store the results in the array variable $connections
         $connections = DB::instance(DB_NAME)->select_array($q, 'user_id_followed');
 
         # Pass data (users and connections) to the view
