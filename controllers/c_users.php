@@ -137,13 +137,20 @@ class users_controller extends base_controller {
 
     }
 
-    public function profile($user_name = NULL) {
+    public function profile($error = NULL) {
         
         # If user isn't blank, they're logged in - display profile
         if($this->user) {
             # Setup view
             $this->template->content = View::instance('v_users_profile');
             $this->template->title   = "Profile of ".$this->user->first_name;
+
+            # Append error message (if any) to the view
+            $this->template->content->error = $error;
+
+            # CSS/JS includes
+            $client_files_head = Array("/css/p2.css");
+            $this->template->client_files_head = Utils::load_client_files($client_files_head);
 
             # Render template
             echo $this->template;
@@ -154,29 +161,43 @@ class users_controller extends base_controller {
         }
     }
 
+    public function is_valid_email($email) {
+
+        $q = "SELECT token 
+            FROM users 
+            WHERE email = '".$email."' 
+            AND user_id != '".$this->user->user_id."'";
+
+        echo $q;
+
+        return (DB::instance(DB_NAME)->select_field($q) == "");
+
+    }
+
     public function p_profile() {
         
         # Update the last modiefied time
         $_POST['modified']  = Time::now();
 
-        # Validate that the email entered is unique
-
+        # Determine if the email entered is unique
         $q = "SELECT token 
             FROM users 
             WHERE email = '".$_POST['email']."' 
             AND user_id != '".$this->user->user_id."'";
 
-        #echo $q;
-
         $token = DB::instance(DB_NAME)->select_field($q);
 
-        if ($token != "") {
-            echo "Not a unique user";
-        } else {
-            # Update the information into the database
+        #if (!valid_email($_POST['email']))
+        # If unique, update the information in the database
+        if ($token == "") {
+            # Update the information in the database
             $where_condition = "WHERE user_id = '".$this->user->user_id."'";
             DB::instance(DB_NAME)->update_row('users', $_POST, $where_condition);
-            Router::redirect("/");      
+            Router::redirect("/");
+
+        # Otherwise, alert user      
+        } else {
+            Router::redirect("/users/profile/error");
         }
 
         # Dump out the results of POST to see what the form submitted
