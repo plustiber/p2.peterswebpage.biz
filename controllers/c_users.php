@@ -11,12 +11,16 @@ class users_controller extends base_controller {
 
     public function signup() {
 
-       # Set up the view
-       $this->template->content = View::instance('v_users_signup');
-       $this->template->title   = "Sign Up";
+        # Set up the view
+        $this->template->content = View::instance('v_users_signup');
+        $this->template->title   = "Sign Up";
        
-       # Render the view
-       echo $this->template;
+        # CSS/JS includes
+        $client_files_head = Array("/js/jstz-1.0.4.min.js");
+        $this->template->client_files_head = Utils::load_client_files($client_files_head);
+
+        # Render the view
+        echo $this->template;
 
     }
 
@@ -26,9 +30,10 @@ class users_controller extends base_controller {
     #   last_name => Last Name;
     #   email => Email;
     #   password => Password;
+    #   timezone => Time Zone (hidden value);
 
     public function p_signup() {
-                
+                    
         # More data we want stored with the user
         $_POST['created']  = Time::now();
         $_POST['modified']  = Time::now();
