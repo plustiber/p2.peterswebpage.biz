@@ -110,6 +110,11 @@ class users_controller extends base_controller {
             */
             setcookie("token", $token, strtotime('+2 weeks'), '/');
 
+            # Update last login time for the user
+            $data = Array("last_login" => Time::now());
+            $where_condition = "WHERE token = '".$token."'";
+            DB::instance(DB_NAME)->update_row('users', $data, $where_condition);
+
             # Send them to the main page - or whever you want them to go
             Router::redirect("/");
 
