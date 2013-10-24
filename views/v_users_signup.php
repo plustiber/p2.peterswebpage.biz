@@ -9,8 +9,7 @@
 	<input type='hidden' name='timezone'>
 
    	<script>
-        $('input[name=timezone]').val('America/New_York');
-       	//$('input[name=timezone]').val(jstz.determine().name());
+       	$('input[name=timezone]').val(jstz.determine().name());
     </script>
 
 	<input type='submit' value='Sign Up'>
