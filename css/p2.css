@@ -2,11 +2,132 @@
 Peter Lustiber
 CSCI E-15 Dynamic Web Applications
 Project 2
-November 1, 2013 
+November 6, 2013 
 **************************************************/
 
-/* Error - set the color to red in order to emphasize error message */
+/* Menu - set the background color to */
 
-.error {
-color: red;
+body {
+	font-family: sans-serif;
+	margin: 0px auto 0px auto;
+	width: 680px;
+}
+
+#logo {
+	width: 650px;
+	border-radius: 10px;
+	margin: 0px auto 0px auto;
+	background-color: CornSilk;
+	padding: 0px 15px 0px 15px;	
+}
+
+#menu {
+	font-family: sans-serif;
+	font-size: 110%;
+	color: black;
+	width: 650px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	margin: 0px auto 0px auto;
+	padding: 15px;
+}
+
+#menu a {
+	font-family: serif;
+	font-size: 100%;
+	text-decoration: none;
+	color: black;
+	padding: 6px 18px 5px 18px;
+}
+
+#menu a:hover {
+	color: white;
+	background-color: gray;
+}
+
+#home {
+	width: 620px;
+	border-radius: 10px;
+	background-color: CornSilk;
+	margin: 20px;
+	padding: 2px 10px 2px 10px;
+}
+
+#home a {
+	color: red;
+	padding: 0px 10px 0px 10px;
+}
+
+#post {
+	width: 620px;
+	border-radius: 10px;
+	background-color: CornSilk;
+	margin: 20px;
+	padding: 2px 10px 2px 10px;
+}
+
+#post p {
+	font-style: italic;
+}
+
+#post h6 {
+	text-align: right;
+}
+
+.profile {
+	border-radius: 10px;
+	background-color: CornSilk;
+	font-size: 100%;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding: 15px;
+}
+
+.profile form {
+	margin-left: inherit;
+	margin-right: inherit;
+}
+
+.profile input {
+	margin-bottom: 15px;
+}
+
+#follow {
+	width: 620px;
+	font-size: 100%;
+/*	border-style: solid;*/
+	border-radius: 10px;
+	background-color: CornSilk;
+	margin: 10px 15px 10px 15px;
+	padding: 5px 15px 5px 15px;
+}
+
+#follow article {
+
+}
+
+#follow a {
+	text-decoration: none;
+	color: black;
+	padding: 0px 18px 0px 18px;
+}
+
+#follow a:hover {
+	color: white;
+	background-color: gray;
+}
+
+img {
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+img.align-left {
+	float: left;
+	margin-right: 10px;
+}
+
+img.small {
+	width: 50px;
+	height: 50px;
 }

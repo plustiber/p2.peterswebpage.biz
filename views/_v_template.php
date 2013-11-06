@@ -5,12 +5,18 @@
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 					
-	<!-- Controller Specific JS/CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/p2.css"> 
+
+    <!-- Controller Specific JS/CSS -->
 	<?php if(isset($client_files_head)) echo $client_files_head; ?>
 	
 </head>
 
 <body>	
+
+    <div id='logo'>
+        <h1><img src='/images/wilmington_beach.jpeg'/ class='small'><?=APP_NAME?></h1>
+    </div>
 
     <div id='menu'>
 

@@ -16,7 +16,9 @@ class users_controller extends base_controller {
         $this->template->title   = "Sign Up";
        
         # CSS/JS includes
-        $client_files_head = Array("/js/jquery-1.10.2.min.js","/js/jstz-1.0.4.min.js");
+        $client_files_head = Array(
+            "/js/jquery-1.10.2.min.js",
+            "/js/jstz-1.0.4.min.js");
         $this->template->client_files_head = Utils::load_client_files($client_files_head);
 
         # Render the view
@@ -34,7 +36,7 @@ class users_controller extends base_controller {
 
     public function p_signup() {
                     
-        # More data we want stored with the user
+        # Set time created /modified to current time
         $_POST['created']  = Time::now();
         $_POST['modified']  = Time::now();
 
@@ -66,7 +68,7 @@ class users_controller extends base_controller {
         $this->template->content->error = $error;
 
         # CSS/JS includes
-        $client_files_head = Array("/css/p2.css");
+        $client_files_head = Array("/css/error.css");
         $this->template->client_files_head = Utils::load_client_files($client_files_head);
 
         # Render the view
@@ -147,6 +149,17 @@ class users_controller extends base_controller {
 
     }
 
+    private function is_unique_email($email) {
+        
+        $q = "SELECT token 
+            FROM users 
+            WHERE email = '".$email."' 
+            AND user_id != '".$this->user->user_id."'";
+
+        return (DB::instance(DB_NAME)->select_field($q) == "");
+
+    }
+
     public function profile($error = NULL) {
         
         # If user isn't blank, they're logged in - display profile
@@ -159,10 +172,13 @@ class users_controller extends base_controller {
             $this->template->content->error = $error;
 
             # CSS/JS includes
-            $client_files_head = Array("/css/p2.css");
+            $client_files_head = Array(
+                "/js/jquery-1.10.2.min.js",
+                "/js/jstz-1.0.4.min.js",
+                "/css/error.css");
             $this->template->client_files_head = Utils::load_client_files($client_files_head);
 
-            # Render template
+           # Render template
             echo $this->template;
         
         # Otherwise, they're not logged in; redirect them to the login page
@@ -171,52 +187,28 @@ class users_controller extends base_controller {
         }
     }
 
-    public function is_valid_email($email) {
-
-        $q = "SELECT token 
-            FROM users 
-            WHERE email = '".$email."' 
-            AND user_id != '".$this->user->user_id."'";
-
-        echo $q;
-
-        return (DB::instance(DB_NAME)->select_field($q) == "");
-
-    }
-
     public function p_profile() {
         
         # Update the last modiefied time
         $_POST['modified']  = Time::now();
 
-        # Determine if the email entered is unique
-        $q = "SELECT token 
-            FROM users 
-            WHERE email = '".$_POST['email']."' 
-            AND user_id != '".$this->user->user_id."'";
+        # Encrypt the password
+        $_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 
-        $token = DB::instance(DB_NAME)->select_field($q);
-
-        #if (!valid_email($_POST['email']))
-        # If unique, update the information in the database
-        if ($token == "") {
-            # Update the information in the database
+        #echo "<pre>";
+        #print_r($_POST);
+        #echo "<pre>";
+        
+        # If user entered a unique email, update information in the database
+        if ($this->is_unique_email($_POST['email'])) {
             $where_condition = "WHERE user_id = '".$this->user->user_id."'";
             DB::instance(DB_NAME)->update_row('users', $_POST, $where_condition);
             Router::redirect("/");
 
-        # Otherwise, alert user      
+        # Otherwise, display error message    
         } else {
             Router::redirect("/users/profile/error");
         }
-
-        # Dump out the results of POST to see what the form submitted
-/*
-        echo '<pre>';
-        print_r($_POST);
-        print_r($this->user);
-        echo '</pre>';          
-*/
 
     }
 

@@ -1,15 +1,15 @@
 <?php foreach($posts as $post): ?>
 
-<article>
+	<article id='post'>
 
-    <h1><?=$post['first_name']?> <?=$post['last_name']?> posted:</h1>
+	    <h3><?=$post['first_name']?> <?=$post['last_name']?> posted:</h3>
 
-    <p><?=$post['content']?></p>
+	    <p><?=$post['content']?></p>
 
-    <time datetime="<?=Time::display($post['created'],'Y-m-d g:i')?>">
-        <?=Time::display($post['created'])?>
-    </time>
+	    <h6><time datetime="<?=Time::display($post['created'],'Y-m-d g:i')?>">
+	        <?=Time::display($post['created'])?>
+	    </time></h6>
 
-</article>
+	</article>
 
 <?php endforeach; ?>
