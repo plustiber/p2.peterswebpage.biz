@@ -26,7 +26,7 @@
         <?php if($user): ?>
 
             <a href='/users/logout'>Logout</a>
-            <a href='/users/profile'>Profile</a>
+            <a href='/users/viewprofile'>Profile</a>
             <a href='/posts/users'>Follow</a>
             <a href='/posts/index'>View Posts</a>
             <a href='/posts/add'>Add Post</a>

@@ -149,6 +149,29 @@ class users_controller extends base_controller {
 
     }
 
+    public function viewprofile() {
+
+        # Set up the view
+        $this->template->content = View::instance('v_users_viewprofile');
+        $this->template->title   = "Profile";
+
+        # Build the query
+        $q = "SELECT *
+            FROM posts
+            WHERE user_id = '".$this->user->user_id."'";
+
+        # Run the query
+        $posts = DB::instance(DB_NAME)->select_rows($q);
+
+        # Pass data to the View
+        $this->template->content->posts = $posts;
+
+        # Render the view
+        echo $this->template;
+
+    }
+
+
     private function is_unique_email($email) {
         
         $q = "SELECT token 
@@ -160,12 +183,12 @@ class users_controller extends base_controller {
 
     }
 
-    public function profile($error = NULL) {
+    public function editprofile($error = NULL) {
         
         # If user isn't blank, they're logged in - display profile
         if($this->user) {
             # Setup view
-            $this->template->content = View::instance('v_users_profile');
+            $this->template->content = View::instance('v_users_editprofile');
             $this->template->title   = "Profile of ".$this->user->first_name;
 
             # Append error message (if any) to the view
@@ -187,7 +210,7 @@ class users_controller extends base_controller {
         }
     }
 
-    public function p_profile() {
+    public function p_editprofile() {
         
         # Update the last modiefied time
         $_POST['modified']  = Time::now();

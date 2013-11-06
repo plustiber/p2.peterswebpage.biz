@@ -1,7 +1,7 @@
 <div class='profile'>
 	<h2>Profile Information</h2>
 
-	<form method='POST' action='/users/p_profile'>
+	<form method='POST' action='/users/p_editprofile'>
 
 		First name: *<br> <input type='text' name='first_name' value = <?=$user->first_name?> size=50 required autofocus><br>
 		Last name: *<br> <input type='text' name='last_name' value = <?=$user->last_name?> size=50 required><br>
