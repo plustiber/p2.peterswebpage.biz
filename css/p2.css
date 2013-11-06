@@ -5,8 +5,6 @@ Project 2
 November 6, 2013 
 **************************************************/
 
-/* Menu - set the background color to */
-
 body {
 	font-family: sans-serif;
 	margin: 0px auto 0px auto;
@@ -74,6 +72,15 @@ body {
 	text-align: right;
 }
 
+#post a {
+	text-decoration: none;
+	color: blue;
+}
+
+#post a:hover {
+	color: red;
+}
+
 .profile {
 	border-radius: 10px;
 	background-color: CornSilk;
@@ -92,18 +99,22 @@ body {
 	margin-bottom: 15px;
 }
 
+.profile a {
+	text-decoration: none;
+	color: blue;
+}
+
+.profile a:hover {
+	color: red;
+}
+
 #follow {
 	width: 620px;
 	font-size: 100%;
-/*	border-style: solid;*/
 	border-radius: 10px;
 	background-color: CornSilk;
 	margin: 10px 15px 10px 15px;
 	padding: 5px 15px 5px 15px;
-}
-
-#follow article {
-
 }
 
 #follow a {

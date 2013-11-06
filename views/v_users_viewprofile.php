@@ -5,10 +5,11 @@
 		Name: <?=$user->first_name?> <?=$user->last_name?> <br>
 		Email address: <?=$user->email?> <br>
 
-	    <?php if(isset($user->location)): ?>
+	    <?php if($user->location != ""): ?>
 			Location: <?=$user->location?><br>
 	    <?php endif; ?>
 
+	    <br>
 	    <a href='/users/editprofile'>Edit Profile</a>
 
 	</div>

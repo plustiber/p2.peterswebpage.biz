@@ -158,7 +158,8 @@ class users_controller extends base_controller {
         # Build the query
         $q = "SELECT *
             FROM posts
-            WHERE user_id = '".$this->user->user_id."'";
+            WHERE user_id = '".$this->user->user_id."'
+            ORDER BY modified DESC";
 
         # Run the query
         $posts = DB::instance(DB_NAME)->select_rows($q);
@@ -226,7 +227,7 @@ class users_controller extends base_controller {
         if ($this->is_unique_email($_POST['email'])) {
             $where_condition = "WHERE user_id = '".$this->user->user_id."'";
             DB::instance(DB_NAME)->update_row('users', $_POST, $where_condition);
-            Router::redirect("/");
+            Router::redirect("/users/viewprofile");
 
         # Otherwise, display error message    
         } else {
