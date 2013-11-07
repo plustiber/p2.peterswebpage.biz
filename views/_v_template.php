@@ -15,7 +15,7 @@
 <body>	
 
     <div id='logo'>
-        <h1><img src='/images/wilmington_beach.jpeg'/ class='small'><?=APP_NAME?></h1>
+        <h1><img src='/images/wilmington_beach.jpeg' alt='Wilmington, NC Beach' class='small'><?=APP_NAME?></h1>
     </div>
 
     <div id='menu'>
