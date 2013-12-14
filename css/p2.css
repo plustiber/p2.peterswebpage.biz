@@ -22,6 +22,7 @@ body {
 #menu {
 	font-family: sans-serif;
 	font-size: 110%;
+	font-weight: bold;
 	color: black;
 	width: 650px;
 	border-top-style: solid;
@@ -75,6 +76,7 @@ body {
 #post a {
 	text-decoration: none;
 	color: blue;
+	padding: 0px 10px 0px 0px;
 }
 
 #post a:hover {

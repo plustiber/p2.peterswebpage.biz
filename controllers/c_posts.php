@@ -145,4 +145,41 @@ class posts_controller extends base_controller {
 
     }
 
+    public function edit($post_id) {
+
+        # Set up the View
+        $this->template->content = View::instance("v_posts_edit");
+        $this->template->title   = "Edit Post";
+
+        # Build query to get the specified post
+        $q = "SELECT *
+            FROM posts
+            WHERE post_id = ".$post_id;
+
+
+        $post = DB::instance(DB_NAME)->select_row($q);
+
+        # Pass data (post) to the view
+        $this->template->content->post = $post;
+
+        # Render the view
+        echo $this->template;
+
+    }
+
+    public function p_edit() {
+        
+        # Update the last modiefied time
+        $_POST['modified']  = Time::now();
+
+        # Update post in the database
+        $where_condition = "WHERE post_id = ".$_POST['post_id'];
+        unset($_POST['post_id']);
+        DB::instance(DB_NAME)->update_row('posts', $_POST, $where_condition);
+        
+        # Send them back
+        Router::redirect("/users/viewprofile");
+
+   }
+
 } # end of class

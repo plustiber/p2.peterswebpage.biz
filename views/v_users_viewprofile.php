@@ -10,7 +10,7 @@
 	    <?php endif; ?>
 
 	    <br>
-	    <a href='/users/editprofile'>Edit Profile</a>
+	    <a href='/users/editprofile'>Edit Profile?</a>
 
 	</div>
 
@@ -22,11 +22,12 @@
 
 			    <p><?=$post['content']?></p>
 
-			    <p><time datetime="<?=Time::display($post['created'],'Y-m-d g:i')?>">
-			        <?=Time::display($post['created'])?>
+			    <p><time datetime="<?=Time::display($post['modified'],'Y-m-d g:i')?>">
+			        <?=Time::display($post['modified'])?>
 			    </time></p>
 
-			    <a href='/posts/delete/<?=$post['post_id']?>'>Delete Post</a>
+			    <a href='/posts/edit/<?=$post['post_id']?>'>Edit?</a>
+			    <a href='/posts/delete/<?=$post['post_id']?>'>Delete?</a>
 
 			</article>
 
